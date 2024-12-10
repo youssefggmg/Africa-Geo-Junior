@@ -1,0 +1,16 @@
+{
+  "name": "africa-geo-junior",
+  "version": "1.0.0",
+  "description": "This project aims to create an interactive educational tool in the form of a web-based game. Designed for students, the platform will help enhance geographic knowledge by focusing on the African continent, including its countries, capitals, and major cities.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.16"
+  }
+}
