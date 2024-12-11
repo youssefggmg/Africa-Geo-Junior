@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body{
+    background-image: url("https://metro.co.uk/wp-content/uploads/2012/08/article-1345117848596-148dc483000005dc-844561_636x372.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
