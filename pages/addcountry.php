@@ -1,5 +1,11 @@
+<?php
+include "../config/db.php";
+$citiesquery = "SELECT c.City_ID as ID, c.name as cityName ,c.type as Ctype, cn.name as countryName,cn.language from city c , country cn where c.FK_country = cn.Country_ID";
+$cities = $connection->query($citiesquery);
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +13,9 @@
     <link rel="stylesheet" href="../src/output.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
-<header>
+    <header>
         <nav class="bg-white border-gray-200 dark:bg-gray-900">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -43,6 +50,33 @@
             </div>
         </nav>
     </header>
-    
+    <section class="flex flex-wrap w-[80%] mx-auto">
+        <?php
+        while ($row = $cities->fetch_assoc()) {
+            echo "<div
+                    class='py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 mb-6 mt-6'>
+                    <img class='block mx-auto h-24 rounded-full sm:mx-0 sm:shrink-0' src='https://img.freepik.com/premium-vector/minimal-city-logo-vector-art-illustration-8_666870-9526.jpg' alt='cityLogo'>
+                    <div class='text-center space-y-2 sm:text-left'>
+                        <div class='space-y-0.5'>
+                            <p class='text-lg text-black font-semibold'>
+                                ".$row['cityName']."
+                            </p>
+                            <p class='text-slate-500 font-medium'>
+                                ".$row['countryName']."
+                            </p>
+                        </div>
+                        <button class='px-4 py-1 text-sm text-green-600 font-semibold rounded-full border border-green-200 hover:text-white hover:bg-green-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 EditButton'data-id =".$row['ID']." data-name =".$row['cityName']." data-type=".$row['Ctype']." >Edit</button>
+                        <button class='px-4 py-1 text-sm text-red-600 font-semibold rounded-full border border-red-200 hover:text-white hover:bg-red-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 deleteButton'data-id =".$row['ID'].">Delete</button>
+                    </div>
+                </div>
+                ";
+        }
+        ?>
+    </section>
+    <div id="popup">
+
+    </div>
+    <script src="../js/Editcity.js" ></script>
 </body>
+
 </html>
