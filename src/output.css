@@ -620,6 +620,14 @@ video {
   margin-inline-start: 1.25rem;
 }
 
+.mb-\[\] {
+  margin-bottom: ;
+}
+
+.mb-\[3em\] {
+  margin-bottom: 3em;
+}
+
 .block {
   display: block;
 }
