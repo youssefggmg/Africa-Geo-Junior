@@ -1,18 +1,15 @@
-<?php
-include "../config/db.php";
-$citiesquery = "SELECT c.City_ID as ID, c.name as cityName ,c.type as Ctype, cn.name as countryName,cn.language from city c , country cn where c.FK_country = cn.Country_ID";
-$cities = $connection->query($citiesquery);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Addcountry</title>
-    <link rel="stylesheet" href="../src/output.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>addCountry</title>
+    <link rel="stylesheet" href="./src/input.css">
+    <link rel="stylesheet" href="./src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./src/input.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -38,7 +35,7 @@ $cities = $connection->query($citiesquery);
                             <a href="./citys.php" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">cities</a>
                         </li>
                         <li>
-                        <a href="./pages/addCountry.php" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">addCountry</a>
+                            <a href="./pages/addCountry.php" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">addCountry</a>
                         </li>
                         <li>
                             <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
@@ -51,33 +48,29 @@ $cities = $connection->query($citiesquery);
             </div>
         </nav>
     </header>
-    <section class="flex flex-wrap w-[80%] mx-auto">
-        <?php
-        while ($row = $cities->fetch_assoc()) {
-            echo "<div
-                    class='py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 mb-6 mt-6'>
-                    <img class='block mx-auto h-24 rounded-full sm:mx-0 sm:shrink-0' src='https://img.freepik.com/premium-vector/minimal-city-logo-vector-art-illustration-8_666870-9526.jpg' alt='cityLogo'>
-                    <div class='text-center space-y-2 sm:text-left'>
-                        <div class='space-y-0.5'>
-                            <p class='text-lg text-black font-semibold'>
-                                ".$row['cityName']."
-                            </p>
-                            <p class='text-slate-500 font-medium'>
-                                ".$row['countryName']."
-                            </p>
-                        </div>
-                        <button class='px-4 py-1 text-sm text-green-600 font-semibold rounded-full border border-green-200 hover:text-white hover:bg-green-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 EditButton'data-id =".$row['ID']." data-name =".$row['cityName']." data-type=".$row['Ctype']." >Edit</button>
-                        <button class='px-4 py-1 text-sm text-red-600 font-semibold rounded-full border border-red-200 hover:text-white hover:bg-red-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 deleteButton'data-id =".$row['ID'].">Delete</button>
-                    </div>
+    <section class="w-[60%] mx-auto mt-10">
+        <form method="POST" action="../dbrequests/addcountry.php">
+            <div class="flex gap-x-6 mb-6">
+                <div class="w-full relative">
+                    <label class="flex items-center mb-2 text-gray-600 text-sm font-medium" for="countryname">CountryName
+                    </label>
+                    <input type="text" id="countryName" name="countryName" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none " placeholder="Botswana" required="">
                 </div>
-                ";
-        }
-        ?>
+                <div class="w-full relative">
+                    <label class="flex  items-center mb-2 text-gray-600 text-sm font-medium" for="population">population
+                    </label>
+                    <input type="number" id="population" name="countrypopulation" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none " placeholder="23578263" required="">
+                </div>
+            </div>
+            <div class="relative mb-6">
+                <label class="flex  items-center mb-2 text-gray-600 text-sm font-medium" for="language">language
+                </label>
+                <input type="text" id="languege" name="countryLanguage" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none " placeholder="arabic" required="">
+            </div>
+            <button class="w-52 h-12 shadow-sm mx-auto rounded-full bg-indigo-600 hover:bg-indigo-800 transition-all duration-700 text-white text-base font-semibold leading-7">Sign Up</button>
+        </form>
     </section>
-    <div id="popup">
 
-    </div>
-    <script src="../js/Editcity.js" ></script>
 </body>
 
 </html>

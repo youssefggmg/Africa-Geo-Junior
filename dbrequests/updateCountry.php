@@ -1,28 +1,34 @@
 <?php
 include '../config/db.php';
-$name = $countryID = $population = $languege = '';
+$name = $countryID = $population = $language = '';
 if (isset($_POST['cname'])) {
     $name = $_POST['cname'];
 }
 if (isset($_POST['cid'])) {
-    $countryID = $_POST['cid'];
+    $countryID = (int) $_POST['cid'];
 }
 if (isset($_POST['population'])) {
-    $population = $_POST['population'];
+    $population = (int) $_POST['population'];
 }
 if (isset($_POST['languege'])) {
     $languege = $_POST['languege'];
 }
-$name =$connection->real_escape_string($name);
-$countryID =$connection->real_escape_string($countryID);
-$population =$connection->real_escape_string($population);
-$languege =$connection->real_escape_string($languege);
-echo $name . $countryID .  $population .  $languege;
+$name = mysqli_real_escape_string($connection, $name);
+$countryID = (int)mysqli_real_escape_string($connection, $countryID);
+$population = (int)mysqli_real_escape_string($connection, $population);
+$language = mysqli_real_escape_string($connection, $languege);
 
 // updateContryInfoQuery is the meaning of the next varaibl
-$update = $connection->prepare("UPDATE country SET Name=?, population=?, language=? WHERE Country_ID=?");;
-$update->bind_param("ssss",$name,$population,$languege,$countryID);
-$update->execute();
-$connection->close();
-// header("location: http://localhost/Africa-Geo-Junior/index.php");
-?>
+$update = mysqli_prepare($connection, "UPDATE country SET Name = ?, population = ?, language = ? WHERE Country_ID = ?");
+if ($update) {
+    mysqli_stmt_bind_param($update, "ssii", $name, $population, $language, $countryID);
+    if (mysqli_stmt_execute($update)) {
+        mysqli_stmt_close($update);
+        header("Location: http://localhost/Africa-Geo-Junior/index.php");
+        exit();
+    } else {
+        die("Query execution failed: " . mysqli_error($connection));
+    }
+} else {
+    die("Failed to prepare statement: " . mysqli_error($connection));
+}

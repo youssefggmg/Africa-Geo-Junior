@@ -6,12 +6,12 @@ EditButton.forEach(button => {
         const cityID = e.currentTarget.dataset.id
         const cityname = e.currentTarget.dataset.name
         const citytype = e.currentTarget.dataset.type
-        
-        let iscapital ="" ;
-        let isNotcapital="" ;
-        if (citytype== "capital") {
-            iscapital="selected"
-        }else{
+
+        let iscapital = "";
+        let isNotcapital = "";
+        if (citytype == "capital") {
+            iscapital = "selected"
+        } else {
             isNotcapital = "selected"
         }
         console.log(iscapital);
@@ -23,7 +23,7 @@ EditButton.forEach(button => {
         <i class="fa-solid fa-square-xmark fa-xl"></i>
       </div>
     </div>
-    <form method='post' action="../dbrequests/editCities.php">
+    <form method='POST' action="../dbrequests/editCities.php">
       <input type='number' class='hidden' name = 'cid' value='${cityID}'>
       <div class='mb-4'>
         <label for='Cname' class='block mb-2 text-sm font-medium'>city name</label>
@@ -39,11 +39,10 @@ EditButton.forEach(button => {
       </div>
       <div>
         <label for='type' class='block mb-2 text-sm font-medium'>type</label>
-
-      <select id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 name='type' ">
-    <option ${iscapital}>capital</option>
-    <option ${isNotcapital} >other</option>
-  </select>
+            <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option ${iscapital} value='capital'>capital</option>
+        <option ${isNotcapital} value='other' >other</option>
+        </select>
       </div>
       <div>
         <p class='text-red-500 pb-5' id='error'></p>
@@ -59,9 +58,9 @@ EditButton.forEach(button => {
     </form>
   </div>
 </div>`
-const closeButton = document.querySelector("#closeButton")
-closeButton.addEventListener("click",()=>{
-    popup.innerHTML= ""
-})
+        const closeButton = document.querySelector("#closeButton")
+        closeButton.addEventListener("click", () => {
+            popup.innerHTML = ""
+        })
     })
 })

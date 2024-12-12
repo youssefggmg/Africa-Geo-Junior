@@ -1,7 +1,8 @@
 <?php
-require_once("./config/db.php");
+include "./config/db.php";
 $query = "select * from city inner join country on city.FK_country = country.Country_ID";
-$Resolt = $connection->query($query);
+$Resolt = mysqli_query($connection,$query);
+$res= mysqli_fetch_all($Resolt,MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +40,7 @@ $Resolt = $connection->query($query);
                             <a href="./pages/citys.php" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">city</a>
                         </li>
                         <li>
-                            <a href="" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">addCountry</a>
+                            <a href="./pages/addCountry.php" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">addCountry</a>
                         </li>
                         <li>
                             <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
@@ -68,7 +69,7 @@ $Resolt = $connection->query($query);
             <tbody class="bg-white divide-y divide-gray-200">
                 <?php
                 if ($Resolt->num_rows > 0) {
-                    while ($row = $Resolt->fetch_assoc()) {
+                    foreach($res as $row) {
                         echo "<tr>
                 <td class='px-6 py-4 whitespace-nowrap'>" . $row['Name'] . "</td>
                 <td class='px-6 py-4 whitespace-nowrap'>" . $row['population'] . "</td>
