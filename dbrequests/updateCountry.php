@@ -18,17 +18,17 @@ $countryID = (int)mysqli_real_escape_string($connection, $countryID);
 $population = (int)mysqli_real_escape_string($connection, $population);
 $language = mysqli_real_escape_string($connection, $languege);
 
-// updateContryInfoQuery is the meaning of the next varaibl
 $update = mysqli_prepare($connection, "UPDATE country SET Name = ?, population = ?, language = ? WHERE Country_ID = ?");
-if ($update) {
-    mysqli_stmt_bind_param($update, "ssii", $name, $population, $language, $countryID);
-    if (mysqli_stmt_execute($update)) {
-        mysqli_stmt_close($update);
-        header("Location: http://localhost/Africa-Geo-Junior/index.php");
-        exit();
-    } else {
-        die("Query execution failed: " . mysqli_error($connection));
-    }
+echo 1;
+mysqli_stmt_bind_param($update, "sisi", $name, $population, $language, $countryID);
+echo 2;
+mysqli_stmt_execute($update);
+echo 3;
+if (mysqli_stmt_execute($update)) {
+    echo 4;
+    mysqli_stmt_close($update);
+    header("Location: http://localhost/Africa-Geo-Junior/index.php");
+    exit();
 } else {
-    die("Failed to prepare statement: " . mysqli_error($connection));
+    die("Query execution failed: " . mysqli_error($connection));
 }

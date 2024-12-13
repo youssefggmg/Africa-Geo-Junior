@@ -38,7 +38,7 @@ $cities = $connection->query($citiesquery);
                             <a href="./citys.php" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">cities</a>
                         </li>
                         <li>
-                        <a href="./pages/addCountry.php" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">addCountry</a>
+                            <a href="./pages/addCountry.php" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">addCountry</a>
                         </li>
                         <li>
                             <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
@@ -60,14 +60,17 @@ $cities = $connection->query($citiesquery);
                     <div class='text-center space-y-2 sm:text-left'>
                         <div class='space-y-0.5'>
                             <p class='text-lg text-black font-semibold'>
-                                ".$row['cityName']."
+                                " . $row['cityName'] . "
                             </p>
                             <p class='text-slate-500 font-medium'>
-                                ".$row['countryName']."
+                                " . $row['countryName'] . "
                             </p>
                         </div>
-                        <button class='px-4 py-1 text-sm text-green-600 font-semibold rounded-full border border-green-200 hover:text-white hover:bg-green-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 EditButton'data-id =".$row['ID']." data-name =".$row['cityName']." data-type=".$row['Ctype']." >Edit</button>
-                        <button class='px-4 py-1 text-sm text-red-600 font-semibold rounded-full border border-red-200 hover:text-white hover:bg-red-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 deleteButton'data-id =".$row['ID'].">Delete</button>
+                        <button class='px-4 py-1 text-sm text-green-600 font-semibold rounded-full border border-green-200 hover:text-white hover:bg-green-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 EditButton'data-id =" . $row['ID'] . " data-name =" . $row['cityName'] . " data-type=" . $row['Ctype'] . " >Edit</button>
+                        <form action='../dbrequests/deletCity.php'>
+                            <input type='number' name='cityID' class='hidden' value='" . $row['ID'] . "'>
+                            <button type='submit' class='px-4 py-1 text-sm text-red-600 font-semibold rounded-full border border-red-200 hover:text-white hover:bg-red-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 deleteButton'data-id =" . $row['ID'] . ">Delete</button>
+                        </form>
                     </div>
                 </div>
                 ";
@@ -77,7 +80,7 @@ $cities = $connection->query($citiesquery);
     <div id="popup">
 
     </div>
-    <script src="../js/Editcity.js" ></script>
+    <script src="../js/Editcity.js"></script>
 </body>
 
 </html>
